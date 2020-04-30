@@ -1,18 +1,17 @@
-
 <ion-content padding>
-  <h3>Order system</h3>
+  <h3>Sistema de pedidos</h3>
   <img src="assets/imgs/tela-inicial.png" alt="logo">
-
   <form>
     <ion-item>
       <ion-label stacked>Email</ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label stacked>Password</ion-label>
-      <ion-input type="Password"></ion-input>
+      <ion-label stacked>Senha</ion-label>
+      <ion-input type="password"></ion-input>
     </ion-item>
-    <button ion-button block>Login</button>
+    <button ion-button block (click)="login()">Entrar</button>
   </form>
-  <button ion-button outline>Sign up</button>
+  <button ion-button block outline>Registrar</button>
+
 </ion-content>
