@@ -39,8 +39,8 @@ export class ProductsPage {
       }
     }
 
-    showDetails() {
-      this.navCtrl.push("ProductDetailPage")
+    showDetails(product_id : string) {
+      this.navCtrl.push("ProductDetailPage", {product_id: product_id})
     }
     
   }
