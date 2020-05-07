@@ -38,6 +38,10 @@ export class ProductsPage {
         error => {});
       }
     }
+
+    showDetails() {
+      this.navCtrl.push("ProductDetailPage")
+    }
     
   }
   
