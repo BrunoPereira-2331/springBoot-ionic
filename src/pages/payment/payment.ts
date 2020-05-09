@@ -21,7 +21,6 @@ export class PaymentPage {
     public formBuilder: FormBuilder) {
       //pega o order que veio da outra page
       this.order = this.navParams.get('order');
-      console.log(this.order);
       this.formGroup = this.formBuilder.group({
         numberInstallments: [1, Validators.required],
         "@type": ["paymentCreditCard", Validators.required]
@@ -30,7 +29,7 @@ export class PaymentPage {
     
     nextPage() {
       this.order.payment = this.formGroup.value;
-      console.log(this.order);
+      this.navCtrl.setRoot('OrderConfirmationPage', {order: this.order});
     }
     
   }
