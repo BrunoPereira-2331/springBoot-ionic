@@ -20,6 +20,7 @@ export class OrderConfirmationPage {
   cartItems: CartItem[];
   client: ClientDTO;
   address: AddressDTO;
+  orderCode: string;
   
   
   constructor(public navCtrl: NavController, 
@@ -37,6 +38,7 @@ export class OrderConfirmationPage {
         this.client = response as ClientDTO;
         this.address = this.findAddress(this.order.deliveryAdress.id, response['addresses']);
       },
+      
       error => {
         this.navCtrl.setRoot('HomePage');
       });
@@ -50,23 +52,32 @@ export class OrderConfirmationPage {
     totalValueOrder() {
       return this.cartService.totalValueCart();
     }
-
+    
     back() {
-      this.navCtrl.setRoot('CartPage')
+      this.navCtrl.setRoot('CartPage');
+    }
+    
+    home() {
+      this.navCtrl.setRoot('CategoriesPage');
     }
     
     checkout() {
       this.orderService.insert(this.order)
-        .subscribe(response => {
-          this.cartService.createOrClearCart();
-          console.log(response.headers.get('location'));
-        },
-        error => {
-          if (error.status == 403) {
-            this.navCtrl.setRoot('HomePage');
-          }
-        });
+      .subscribe(response => {
+        this.cartService.createOrClearCart();
+        this.orderCode = this.extractId(response.headers.get('location'));
+      },
+      error => {
+        if (error.status == 403) {
+          this.navCtrl.setRoot('HomePage');
+        }
+      });
     }
     
+    private extractId(location : string) : string {
+      let position = location.lastIndexOf('/');
+      console.log(position);
+      return location.substring(position + 1, location.length);
+    }
   }
   
